@@ -26,9 +26,9 @@ const EmployeeSidebarFilters = ({
     activeCount,
     inactiveCount,
     departmentCounts,
-    selectedStatus,
+    // selectedStatus,
     setSelectedStatus,
-    selectedDepartment,
+    // selectedDepartment,
     setSelectedDepartment,
 }: EmployeeSidebarFiltersProps) => {
     const departments = Object.keys(departmentCounts || {});
