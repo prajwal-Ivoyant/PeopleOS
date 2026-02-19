@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../../app/hooks";
-import { deleteEmployee, toggleEmployeeStatus } from "../../employeeSlice";
+import { deleteEmployee,  } from "../../employeeSlice";//toggleEmployeeStatus
 import type { EmployeeType } from "../employeeTypes";
 
 import { Card, Typography, Tag, Space, Button, Popconfirm, Divider, } from "antd";
@@ -8,7 +8,7 @@ import { Card, Typography, Tag, Space, Button, Popconfirm, Divider, } from "antd
 import {
     EditOutlined,
     DeleteOutlined,
-    SyncOutlined,
+    // SyncOutlined,
     MailOutlined,
     ApartmentOutlined,
     CrownOutlined,
