@@ -1,0 +1,14 @@
+body {
+    background: #ffffff;
+}
+
+.ant-layout {
+    background: inherit !important;
+}
+
+.ant-layout-header,
+.ant-layout-footer,
+.ant-layout-sider,
+.ant-layout-content {
+    background: inherit !important;
+}
