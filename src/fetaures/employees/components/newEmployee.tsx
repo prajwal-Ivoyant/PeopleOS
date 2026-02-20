@@ -52,6 +52,8 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
             open={open}
             title="Add New Employee"
             onCancel={onClose}
+            centered
+            width={850}
             footer={[
                 <Button key="cancel" onClick={onClose}>
                     Cancel
