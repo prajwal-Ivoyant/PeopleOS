@@ -1,0 +1,59 @@
+.employee-card {
+    border: 1px solid #1e293b !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease;
+    color: #000000;
+}
+
+.employee-card:hover {
+    border-color: #1677ff !important;
+    transform: translateY(-4px);
+}
+
+.card-divider {
+    border-color: #1e293b !important;
+    margin: 12px 0 !important;
+}
+
+.card-text {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.salary-text {
+    color: #1677ff !important;
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.status-tag {
+    border-radius: 20px !important;
+    font-weight: 500;
+    padding: 4px 14px !important;
+}
+
+.status-tag.active {
+    background: rgba(163, 230, 53, 0.15) !important;
+    color: #a3e635 !important;
+    border: 1px solid #a3e635 !important;
+}
+
+.status-tag.inactive {
+    background: rgba(244, 63, 94, 0.15) !important;
+    color: #f43f5e !important;
+    border: 1px solid #f43f5e !important;
+}
+
+.view-btn {
+    background: transparent !important;
+    border: 1px solid #1e293b !important;
+    border-radius: 12px !important;
+}
+
+.view-btn:hover {
+    border-color: #1677ff !important;
+    color: #1677ff !important;
+}

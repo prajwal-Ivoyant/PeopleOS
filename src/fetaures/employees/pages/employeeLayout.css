@@ -11,5 +11,36 @@ body {
 .ant-layout-sider,
 .ant-layout-content {
     background: inherit !important;
-    border: 0.1px solid rgba(0, 0, 0, 0.146);
+
+}
+
+.app-header {
+    border-bottom: 1px solid #1e293b;
+}
+
+.app-layout {
+    min-height: 100vh;
+}
+
+.app-sider {
+    border-right: 1px solid #1e293b;
+    padding-top: 20px;
+}
+
+.app-footer {
+    text-align: center;
+    border-top: 1px solid #1e293b;
+}
+
+.content-header {
+    align-items: baseline;
+    padding: 20px;
+    padding-bottom: 15px;
+
+    gap: 16px;
+}
+
+.content-title {
+    margin: 0 !important;
+    font-weight: 700;
 }

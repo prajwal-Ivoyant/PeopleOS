@@ -13,6 +13,8 @@ import {
     Form,
     Input,
     Select,
+    DatePicker,
+    message
 } from "antd";
 
 import {
@@ -96,6 +98,9 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                 setIsEditing(false);
                 onClose();
             }}
+            className="employee-modal"
+            centered
+            width={850}
             footer={
                 isEditing
                     ? [
@@ -126,6 +131,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             title="Delete employee?"
                             onConfirm={() => {
                                 dispatch(deleteEmployee(employee.id));
+                                message.success(`succefully deleted the employee ${employee.name} details`)
                                 onClose();
                             }}
                         >
@@ -292,7 +298,9 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 name="joinedDate"
                                 rules={[{ required: true }]}
                             >
-                                <Input />
+                                <DatePicker
+                                    style={{ width: "100%" }}
+                                />
                             </Form.Item>
                         ) : (
                             <>

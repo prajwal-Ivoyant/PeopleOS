@@ -4,6 +4,8 @@ import {
     CheckSquareOutlined,
     StopOutlined,
 } from "@ant-design/icons";
+import "./employeesSideBar.css";
+
 
 const { Text } = Typography;
 
@@ -26,65 +28,73 @@ const EmployeeSidebarFilters = ({
     activeCount,
     inactiveCount,
     departmentCounts,
-    // selectedStatus,
+    selectedStatus,
     setSelectedStatus,
-    // selectedDepartment,
+    selectedDepartment,
     setSelectedDepartment,
 }: EmployeeSidebarFiltersProps) => {
     const departments = Object.keys(departmentCounts || {});
 
     return (
-        <div style={{ margin: 24 }}>
+        <div className="sidebar-container">
+            <Text className="sidebar-title">OVERVIEW</Text>
 
-            <Text strong>OVERVIEW</Text>
-
-            <List >
+            <List className="sidebar-list">
                 <List.Item
-                    style={{ cursor: "pointer" }}
+                    className={`sidebar-item ${selectedStatus === "all" ? "active-item" : ""
+                        }`}
                     onClick={() => {
                         setSelectedStatus("all");
                         setSelectedDepartment("all");
                     }}
-                    actions={[<Badge count={totalCount} showZero color="#faad145f" />]}
+                    actions={[
+                        <Badge key="all" count={totalCount} className="badge-pill" />,
+                    ]}
                 >
-                    <TeamOutlined style={{ marginRight: 8 }} />
+                    <TeamOutlined />
                     <Text>All Employees</Text>
                 </List.Item>
 
                 <List.Item
-                    style={{ cursor: "pointer" }}
+                    className={`sidebar-item ${selectedStatus === "active" ? "active-item" : ""
+                        }`}
                     onClick={() => {
                         setSelectedStatus("active");
 
                     }}
-                    actions={[<Badge count={activeCount} showZero color="#3030302b" />]}
+                    actions={[
+                        <Badge key="active" count={activeCount} className="badge-pill" />,
+                    ]}
                 >
                     <CheckSquareOutlined />
                     <Text>Active</Text>
                 </List.Item>
 
                 <List.Item
-                    style={{ cursor: "pointer" }}
+                    className={`sidebar-item ${selectedStatus === "inactive" ? "active-item" : ""
+                        }`}
                     onClick={() => {
                         setSelectedStatus("inactive");
                     }}
-                    actions={[<Badge count={inactiveCount} showZero color="#3030302b" />]}
+                    actions={[
+                        <Badge key="inactive" count={inactiveCount} className="badge-pill red-pill" />,
+                    ]}
                 >
-                    <StopOutlined />
+                    <StopOutlined className="inactive-icon" />
                     <Text>Inactive</Text>
                 </List.Item>
             </List>
 
-            <Divider />
+            <Divider className="sidebar-divider" />
 
-            <Text strong>DEPARTMENTS</Text>
+            <Text className="sidebar-title">DEPARTMENTS</Text>
 
             <Select
-                style={{ width: "100%", marginTop: 12 }}
+                className="department-select"
                 placeholder="Select Department"
+                value={selectedDepartment}
                 onChange={(value: string) => {
                     setSelectedDepartment(value);
-
                 }}
                 options={[
                     { label: "All", value: "all" },
@@ -95,7 +105,6 @@ const EmployeeSidebarFilters = ({
                 ]}
             />
         </div>
-
     );
 };
 
