@@ -28,15 +28,7 @@ const EmployeeSidebarFilters = ({
     departmentCounts,
     // selectedStatus,
     setSelectedStatus,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     // selectedDepartment,
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
     setSelectedDepartment,
 }: EmployeeSidebarFiltersProps) => {
     const departments = Object.keys(departmentCounts || {});

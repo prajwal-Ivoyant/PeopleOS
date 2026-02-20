@@ -1,26 +1,8 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import { useState } from "react";
-import { useAppDispatch } from "../../../app/hooks";
-import { deleteEmployee,  } from "../../employeeSlice";//toggleEmployeeStatus
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 import type { EmployeeType } from "../employeeTypes";
 
 import { Card, Typography, Tag, Space, Divider, Button } from "antd";
 
 import {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    EditOutlined,
-    DeleteOutlined,
-    // SyncOutlined,
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     MailOutlined,
     ApartmentOutlined,
     CrownOutlined,
