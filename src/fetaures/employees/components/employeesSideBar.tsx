@@ -29,7 +29,11 @@ const EmployeeSidebarFilters = ({
     // selectedStatus,
     setSelectedStatus,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // selectedDepartment,
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
