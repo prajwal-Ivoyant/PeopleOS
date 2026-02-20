@@ -1,14 +1,20 @@
+<<<<<<< Updated upstream
 import { useState } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 import { deleteEmployee,  } from "../../employeeSlice";//toggleEmployeeStatus
+=======
+>>>>>>> Stashed changes
 import type { EmployeeType } from "../employeeTypes";
 
-import { Card, Typography, Tag, Space, Button, Popconfirm, Divider, } from "antd";
+import { Card, Typography, Tag, Space, Divider, Button } from "antd";
 
 import {
+<<<<<<< Updated upstream
     EditOutlined,
     DeleteOutlined,
     // SyncOutlined,
+=======
+>>>>>>> Stashed changes
     MailOutlined,
     ApartmentOutlined,
     CrownOutlined,
@@ -20,17 +26,19 @@ const { Title, Text } = Typography;
 
 type Props = {
     employee: EmployeeType;
+    onClick: () => void;
 };
 
-const EmployeeCard = ({ employee }: Props) => {
-    const dispatch = useAppDispatch();
-    const [isEditing, setIsEditing] = useState(false);
+const EmployeeCard = ({ employee, onClick }: Props) => {
 
     const isActive = employee.status === "active";
 
     return (
         <>
-            <Card hoverable>
+            <Card
+                hoverable
+
+            >
                 <Space direction="vertical" size="middle" style={{ width: "100%" }}>
                     <Space style={{ width: "100%", justifyContent: "space-between" }}>
                         <Title level={5} style={{ margin: 0 }}>
@@ -68,36 +76,11 @@ const EmployeeCard = ({ employee }: Props) => {
 
                     <Divider style={{ margin: "10px 0" }} />
 
-                    <Space wrap>
-                        <Button icon={<EditOutlined />} onClick={() => setIsEditing(true)}>
-                            Edit
-                        </Button>
-
-                        {/* <Button
-                            icon={<SyncOutlined />}
-                            onClick={() => dispatch(toggleEmployeeStatus(employee.id))}
-                        >
-                            Toggle Status
-                        </Button> */}
-
-                        <Popconfirm
-                            title="Delete employee?"
-                            description="This action cannot be undone."
-                            okText="Delete"
-                            cancelText="Cancel"
-                            onConfirm={() => dispatch(deleteEmployee(employee.id))}
-                        >
-                            <Button danger icon={<DeleteOutlined />}>
-                                Delete
-                            </Button>
-                        </Popconfirm>
-                    </Space>
+                    <Button onClick={onClick} >View Details</Button>
                 </Space>
             </Card>
 
-            {isEditing && (
-                console.log("editinggggggggggg...")
-            )}
+
         </>
     );
 };

@@ -1,4 +1,4 @@
-import { Typography, List, Badge, Divider } from "antd";
+import { Typography, List, Badge, Divider, Select } from "antd";
 import {
     TeamOutlined,
     CheckSquareOutlined,
@@ -28,7 +28,11 @@ const EmployeeSidebarFilters = ({
     departmentCounts,
     // selectedStatus,
     setSelectedStatus,
+<<<<<<< Updated upstream
     // selectedDepartment,
+=======
+
+>>>>>>> Stashed changes
     setSelectedDepartment,
 }: EmployeeSidebarFiltersProps) => {
     const departments = Object.keys(departmentCounts || {});
@@ -45,7 +49,7 @@ const EmployeeSidebarFilters = ({
                         setSelectedStatus("all");
                         setSelectedDepartment("all");
                     }}
-                    actions={[<Badge count={totalCount} />]}
+                    actions={[<Badge count={totalCount} showZero color="#faad145f" />]}
                 >
                     <TeamOutlined style={{ marginRight: 8 }} />
                     <Text>All Employees</Text>
@@ -55,9 +59,9 @@ const EmployeeSidebarFilters = ({
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                         setSelectedStatus("active");
-                        setSelectedDepartment("all");
+
                     }}
-                    actions={[<Badge count={activeCount} />]}
+                    actions={[<Badge count={activeCount} showZero color="#3030302b" />]}
                 >
                     <CheckSquareOutlined />
                     <Text>Active</Text>
@@ -67,9 +71,8 @@ const EmployeeSidebarFilters = ({
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                         setSelectedStatus("inactive");
-                        setSelectedDepartment("all");
                     }}
-                    actions={[<Badge count={inactiveCount} />]}
+                    actions={[<Badge count={inactiveCount} showZero color="#3030302b" />]}
                 >
                     <StopOutlined />
                     <Text>Inactive</Text>
@@ -80,21 +83,21 @@ const EmployeeSidebarFilters = ({
 
             <Text strong>DEPARTMENTS</Text>
 
-            <List>
-                {departments.map((dept) => (
-                    <List.Item
-                        key={dept}
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                            setSelectedDepartment(dept);
-                            setSelectedStatus("all");
-                        }}
-                        actions={[<Badge count={departmentCounts[dept]} />]}
-                    >
-                        <Text>{dept}</Text>
-                    </List.Item>
-                ))}
-            </List>
+            <Select
+                style={{ width: "100%", marginTop: 12 }}
+                placeholder="Select Department"
+                onChange={(value: string) => {
+                    setSelectedDepartment(value);
+
+                }}
+                options={[
+                    { label: "All", value: "all" },
+                    ...departments.map((dept) => ({
+                        label: `${dept} (${departmentCounts[dept]})`,
+                        value: dept,
+                    })),
+                ]}
+            />
         </div>
 
     );

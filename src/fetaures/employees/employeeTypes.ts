@@ -17,9 +17,10 @@ export interface EmployeeType {
 
 export const EmployeeSortEnum = {
     NAME_ASC: "name-asc",
-    NAME_DESC: "name-desc",
     SALARY_ASC: "salary-asc",
     SALARY_DESC: "salary-desc",
+    DATE_JOIN: "date-join",
+    DEPARTMENT: "department",
 } as const;
 
 export type EmployeeSortEnum =
