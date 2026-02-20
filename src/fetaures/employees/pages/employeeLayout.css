@@ -11,4 +11,5 @@ body {
 .ant-layout-sider,
 .ant-layout-content {
     background: inherit !important;
+    border: 0.1px solid rgba(0, 0, 0, 0.146);
 }

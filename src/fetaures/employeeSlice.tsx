@@ -31,19 +31,15 @@ const employeeSlice = createSlice({
 
         updateEmployee: (
             state,
-            action: PayloadAction<{ id: string; updatedData: Partial<EmployeeType> }
-            >) => {
+            action: PayloadAction<EmployeeType>
+        ) => {
+            const index = state.employees.findIndex(
+                (e) => e.id === action.payload.id
+            );
 
-            const { id, updatedData } = action.payload;
-
-            const index = state.employees.findIndex((emp) => emp.id === id);
-
-            if (index != -1) {
-                state.employees[index] = {
-                    ...state.employees[index], ...updatedData
-                }
+            if (index !== -1) {
+                state.employees[index] = action.payload;
             }
-
         },
 
         toggleEmployeeStatus: (state, action: PayloadAction<string>) => {
