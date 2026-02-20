@@ -6,15 +6,10 @@ body {
     background: inherit !important;
 }
 
-.ant-layout-header,
-.ant-layout-footer,
-.ant-layout-sider,
-.ant-layout-content {
-    background: inherit !important;
 
-}
 
 .app-header {
+    background: rgba(122, 120, 120, 0.075);
     border-bottom: 1px solid #1e293b;
 }
 
@@ -22,12 +17,19 @@ body {
     min-height: 100vh;
 }
 
+
+.app-content {
+    background: rgba(235, 233, 233, 0.073);
+}
+
 .app-sider {
+    background: rgba(235, 233, 233, 0.21);
     border-right: 1px solid #1e293b;
     padding-top: 20px;
 }
 
 .app-footer {
+    background: rgba(80, 79, 79, 0.582);
     text-align: center;
     border-top: 1px solid #1e293b;
 }

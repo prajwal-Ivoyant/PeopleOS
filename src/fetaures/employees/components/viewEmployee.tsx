@@ -14,7 +14,7 @@ import {
     Input,
     Select,
     DatePicker,
-    message
+    message,
 } from "antd";
 
 import {
@@ -31,6 +31,8 @@ import {
 
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { selectEmployees } from "../employeeSelectors";
+
+import dayjs from "dayjs";
 
 const { Title, Text } = Typography;
 
@@ -53,6 +55,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
         selectEmployees(state).find((e) => e.id === employeeId)
     );
 
+    // 🔥 FIX: Convert string → dayjs
     useEffect(() => {
         if (isEditing && employee) {
             form.setFieldsValue({
@@ -61,7 +64,9 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                 department: employee.department,
                 role: employee.role,
                 salary: employee.salary,
-                joinedDate: employee.joinedDate,
+                joinedDate: employee.joinedDate
+                    ? dayjs(employee.joinedDate)
+                    : null,
             });
         }
     }, [isEditing, employee, form]);
@@ -75,10 +80,14 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
             const updatedEmployee = {
                 ...employee,
                 ...values,
+                joinedDate: values.joinedDate.format("YYYY-MM-DD"), // 🔥 convert back to string
             };
 
             dispatch(updateEmployee(updatedEmployee));
-            console.log("helllloooo", updatedEmployee)
+            message.success(
+                `Updated ${updatedEmployee.name} successfully`
+            );
+
             setIsEditing(false);
         } catch (err) {
             console.log("Validation failed");
@@ -95,10 +104,10 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
             open={open}
             title="Employee Details"
             onCancel={() => {
+                form.resetFields();
                 setIsEditing(false);
                 onClose();
             }}
-            className="employee-modal"
             centered
             width={850}
             footer={
@@ -131,7 +140,9 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             title="Delete employee?"
                             onConfirm={() => {
                                 dispatch(deleteEmployee(employee.id));
-                                message.success(`succefully deleted the employee ${employee.name} details`)
+                                message.success(
+                                    `Successfully deleted ${employee.name}`
+                                );
                                 onClose();
                             }}
                         >
@@ -142,6 +153,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                     ]
             }
         >
+            {/* Header */}
             <Flex align="center" gap={20} style={{ padding: 20 }}>
                 <Avatar size={100}>
                     {employee.name.charAt(0)}
@@ -174,6 +186,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
             <Divider />
 
+            {/* Section Header */}
             <Row
                 justify="space-between"
                 align="middle"
@@ -192,6 +205,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                 )}
             </Row>
 
+            {/* Form */}
             <Form form={form} layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col span={12}>
@@ -217,7 +231,10 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             <Form.Item
                                 label="Email"
                                 name="email"
-                                rules={[{ required: true }]}
+                                rules={[
+                                    { required: true },
+                                    { type: "email" },
+                                ]}
                             >
                                 <Input />
                             </Form.Item>
@@ -286,7 +303,9 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             <>
                                 <Text strong>Salary</Text>
                                 <br />
-                                <Text>₹{employee.salary}</Text>
+                                <Text>
+                                    ₹{employee.salary.toLocaleString()}
+                                </Text>
                             </>
                         )}
                     </Col>
@@ -298,9 +317,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 name="joinedDate"
                                 rules={[{ required: true }]}
                             >
-                                <DatePicker
-                                    style={{ width: "100%" }}
-                                />
+                                <DatePicker style={{ width: "100%" }} />
                             </Form.Item>
                         ) : (
                             <>
