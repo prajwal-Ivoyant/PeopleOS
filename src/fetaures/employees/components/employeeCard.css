@@ -6,7 +6,9 @@
 }
 
 .employee-card:hover {
-    border-color: #1677ff !important;
+    border: 1.5px solid #1677ff !important;
+
+
     transform: translateY(-4px);
 }
 
