@@ -60,7 +60,7 @@ const EmployeeSidebarFilters = ({
                         }`}
                     onClick={() => {
                         setSelectedStatus("active");
-                        setSelectedDepartment("all");
+
                     }}
                     actions={[
                         <Badge key="active" count={activeCount} className="badge-pill" />,
@@ -75,7 +75,6 @@ const EmployeeSidebarFilters = ({
                         }`}
                     onClick={() => {
                         setSelectedStatus("inactive");
-                        setSelectedDepartment("all");
                     }}
                     actions={[
                         <Badge key="inactive" count={inactiveCount} className="badge-pill red-pill" />,

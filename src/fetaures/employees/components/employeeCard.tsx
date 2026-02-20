@@ -25,7 +25,7 @@ const EmployeeCard = ({ employee, onClick }: Props) => {
             bodyStyle={{ padding: 24 }}
         >
             <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-                {/* Header */}
+               
                 <Space style={{ width: "100%", justifyContent: "space-between" }}>
                     <div>
                         <Title level={5} className="employee-name">
@@ -41,7 +41,7 @@ const EmployeeCard = ({ employee, onClick }: Props) => {
 
                 <Divider className="card-divider" />
 
-                {/* Details */}
+                
                 <Space direction="vertical" size={8}>
                     <Text className="card-text">
                         <MailOutlined /> {employee.email}
