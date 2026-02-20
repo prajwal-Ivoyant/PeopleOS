@@ -11,7 +11,7 @@ import {
     Form, message,
 } from "antd";
 
-import { SaveOutlined, SyncOutlined } from "@ant-design/icons";
+import { SaveOutlined } from "@ant-design/icons";
 import { addEmployee } from "../../employeeSlice";
 import { useAppDispatch } from "../../../app/hooks";
 
