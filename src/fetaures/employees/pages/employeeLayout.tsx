@@ -13,9 +13,10 @@ import EmployeesFilter from "../components/employeesFilter";
 import EmployeeSidebarFilters from "../components/employeesSideBar";
 import EmployeeList from "../components/employeesList";
 
-import { Flex, Layout } from 'antd';
+import { Flex, Layout, Typography } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
+const { Title } = Typography
 
 import "./employeeLayout.css"
 
@@ -35,51 +36,56 @@ function EmployeeLayout() {
     );
 
     return (
-        <Flex>
-            <Layout >
-                <Header  >
-                    <EmployeesFilter
-                        search={search}
-                        setSearch={setSearch}
-                        sort={sort}
-                        setSort={setSort}
+        <Layout className="app-layout">
+            <Header className="app-header">
+                <EmployeesFilter
+                    search={search}
+                    setSearch={setSearch}
+                    sort={sort}
+                    setSort={setSort}
+                />
+            </Header>
+
+            <Layout className="app-body">
+                <Sider width={280} className="app-sider">
+                    <EmployeeSidebarFilters
+                        totalCount={employees.length}
+                        activeCount={activeEmployees.length}
+                        inactiveCount={inactiveEmployees.length}
+                        departmentCounts={departmentCounts}
+                        selectedStatus={status}
+                        setSelectedStatus={setStatus}
+                        selectedDepartment={department}
+                        setSelectedDepartment={setDepartment}
                     />
-                </Header>
+                </Sider>
 
+                <Content className="app-content">
+                    <Flex className="content-header">
 
-                <Layout style={{ minHeight: "100vh" }}>
+                        <Title level={2} className="content-title">
+                            All Employees
+                        </Title>
 
-                    <Sider width="20%">
-                        <EmployeeSidebarFilters
-                            totalCount={employees.length}
-                            activeCount={activeEmployees.length}
-                            inactiveCount={inactiveEmployees.length}
-                            departmentCounts={departmentCounts}
-                            selectedStatus={status}
-                            setSelectedStatus={setStatus}
-                            selectedDepartment={department}
-                            setSelectedDepartment={setDepartment}
-                        />
-                    </Sider>
-                    <Content >
-                        <EmployeeList
-                            employees={employees}
-                            activeEmployees={activeEmployees}
-                            inactiveEmployees={inactiveEmployees}
-                            department={department}
-                            search={search}
-                            sort={sort}
-                            status={status}
-
-
-                        ></EmployeeList>
-                    </Content>
-
-                </Layout>
-                <Footer  >Footer</Footer>
+                        <span className="content-count">
+                            {activeEmployees.length} active people
+                        </span>
+                    </Flex>
+                    <EmployeeList
+                        employees={employees}
+                        activeEmployees={activeEmployees}
+                        inactiveEmployees={inactiveEmployees}
+                        department={department}
+                        search={search}
+                        sort={sort}
+                        status={status}
+                    />
+                </Content>
             </Layout>
-        </Flex >
-    )
+
+            <Footer className="app-footer">Footer</Footer>
+        </Layout>
+    );
 }
 
 export default EmployeeLayout

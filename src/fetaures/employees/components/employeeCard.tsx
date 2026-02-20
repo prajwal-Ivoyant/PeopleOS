@@ -1,14 +1,12 @@
 import type { EmployeeType } from "../employeeTypes";
-
 import { Card, Typography, Tag, Space, Divider, Button } from "antd";
-
 import {
     MailOutlined,
     ApartmentOutlined,
-    CrownOutlined,
     CalendarOutlined,
     MoneyCollectOutlined,
 } from "@ant-design/icons";
+import "./employeeCard.css";
 
 const { Title, Text } = Typography;
 
@@ -18,58 +16,57 @@ type Props = {
 };
 
 const EmployeeCard = ({ employee, onClick }: Props) => {
-
     const isActive = employee.status === "active";
 
     return (
-        <>
-            <Card
-                hoverable
-
-            >
-                <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-                    <Space style={{ width: "100%", justifyContent: "space-between" }}>
-                        <Title level={5} style={{ margin: 0 }}>
+        <Card
+            hoverable
+            className={`employee-card ${isActive ? "active-card" : ""}`}
+            bodyStyle={{ padding: 24 }}
+        >
+            <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+                {/* Header */}
+                <Space style={{ width: "100%", justifyContent: "space-between" }}>
+                    <div>
+                        <Title level={5} className="employee-name">
                             {employee.name}
                         </Title>
+                        <Text className="employee-role">{employee.role}</Text>
+                    </div>
 
-                        <Tag color={isActive ? "green" : "blue"}>
-                            {employee.status.toUpperCase()}
-                        </Tag>
-                    </Space>
-
-                    <Divider style={{ margin: "8px 0" }} />
-
-                    <Space direction="vertical" size={6}>
-                        <Text>
-                            <MailOutlined /> {employee.email}
-                        </Text>
-
-                        <Text>
-                            <CrownOutlined /> {employee.role}
-                        </Text>
-
-                        <Text>
-                            <ApartmentOutlined /> {employee.department}
-                        </Text>
-
-                        <Text>
-                            <MoneyCollectOutlined /> ₹{employee.salary}
-                        </Text>
-
-                        <Text>
-                            <CalendarOutlined /> {employee.joinedDate}
-                        </Text>
-                    </Space>
-
-                    <Divider style={{ margin: "10px 0" }} />
-
-                    <Button onClick={onClick} >View Details</Button>
+                    <Tag className={`status-tag ${isActive ? "active" : "inactive"}`}>
+                        {employee.status.toUpperCase()}
+                    </Tag>
                 </Space>
-            </Card>
 
+                <Divider className="card-divider" />
 
-        </>
+                {/* Details */}
+                <Space direction="vertical" size={8}>
+                    <Text className="card-text">
+                        <MailOutlined /> {employee.email}
+                    </Text>
+
+                    <Text className="card-text">
+                        <ApartmentOutlined /> {employee.department}
+                    </Text>
+
+                    <Text className="card-text">
+                        <CalendarOutlined /> {employee.joinedDate}
+                    </Text>
+
+                    <Text className="salary-text">
+                        <MoneyCollectOutlined /> ₹{employee.salary}
+                    </Text>
+                </Space>
+
+                <Divider className="card-divider" />
+
+                <Button className="view-btn" block onClick={onClick}>
+                    View Details →
+                </Button>
+            </Space>
+        </Card>
     );
 };
 

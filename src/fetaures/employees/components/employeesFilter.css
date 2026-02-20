@@ -1,0 +1,41 @@
+.logo-text {
+    margin: 0 !important;
+    color: rgb(0, 0, 0) !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-icon {
+    font-size: 20px;
+}
+
+.highlight {
+    color: #1677ff;
+}
+
+.search-input {
+    width: 360px;
+}
+
+.search-input .ant-input {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+}
+
+.sort-select {
+    width: 180px;
+}
+
+.sort-select .ant-select-selector {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: white !important;
+}
+
+.add-btn {
+   
+    color: black !important;
+    font-weight: 500;
+}

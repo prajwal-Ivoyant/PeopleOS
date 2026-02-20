@@ -11,7 +11,7 @@ import {
     Form, message,
 } from "antd";
 
-import { SaveOutlined } from "@ant-design/icons";
+import { SaveOutlined, SyncOutlined } from "@ant-design/icons";
 import { addEmployee } from "../../employeeSlice";
 import { useAppDispatch } from "../../../app/hooks";
 
@@ -41,7 +41,7 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
             };
 
             dispatch(addEmployee(newEmployee));
-            message.info(`successfully added new Employee ${newEmployee.name}`)
+            message.success(`successfully added new Employee ${newEmployee.name}`)
             form.resetFields();
             onClose();
         });
@@ -61,6 +61,7 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                     type="primary"
                     icon={<SaveOutlined />}
                     onClick={handleSave}
+                // loading={loadings[3] && { icon: <SyncOutlined spin /> }}
                 >
                     Save
                 </Button>,
