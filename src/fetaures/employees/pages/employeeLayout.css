@@ -9,8 +9,8 @@ body {
 
 
 .app-header {
-    background: rgba(122, 120, 120, 0.075);
-    border-bottom: 1px solid #1e293b;
+    background: #F8FAFF;
+    border-bottom: 1px solid #1677ff46;
 }
 
 .app-layout {
@@ -19,19 +19,20 @@ body {
 
 
 .app-content {
-    background: rgba(235, 233, 233, 0.073);
+    background: #e2eafccb;
+    /* edf2fb */
 }
 
 .app-sider {
-    background: rgba(235, 233, 233, 0.21);
-    border-right: 1px solid #1e293b;
+    background: #F8FAFF;
+    border-right: 1px solid #1677ff46;
     padding-top: 20px;
 }
 
 .app-footer {
-    background: rgba(80, 79, 79, 0.582);
+    background: #F8FAFF;
     text-align: center;
-    border-top: 1px solid #1e293b;
+    border-top: 1px solid #1677ff46;
 }
 
 .content-header {
