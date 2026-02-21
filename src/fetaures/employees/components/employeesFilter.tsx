@@ -50,7 +50,7 @@ const EmployeesFilter = ({ search, setSearch, sort, setSort }: Props) => {
                                 { value: SortValues.SALARY_ASC, label: "Salary Low-High" },
                                 { value: SortValues.SALARY_DESC, label: "Salary High-Low" },
                                 { value: SortValues.DATE_JOIN, label: "Date Join" },
-                                { value: SortValues.DEPARTMENT, label: "Department" },
+
                             ]}
                         />
 
@@ -59,7 +59,7 @@ const EmployeesFilter = ({ search, setSearch, sort, setSort }: Props) => {
                             icon={<PlusOutlined />}
                             className="add-btn"
                             onClick={() => setIsOpen(true)}
-                            
+
                         >
                             Add Employee
                         </Button>
