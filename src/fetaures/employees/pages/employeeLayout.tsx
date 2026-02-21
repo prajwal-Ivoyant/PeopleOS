@@ -7,7 +7,7 @@ import {
 } from "../employeeSelectors";
 
 import { selectDepartmentCounts } from "../utils/deptExtract";
-import { EmployeeSortEnum } from "../employeeTypes";
+import { EmployeeSortEnum, type EmployeeStatus } from "../employeeTypes";
 
 import EmployeesFilter from "../components/employeesFilter";
 import EmployeeSidebarFilters from "../components/employeesSideBar";
@@ -28,7 +28,7 @@ function EmployeeLayout() {
     const departmentCounts = useAppSelector(selectDepartmentCounts);
 
     const [search, setSearch] = useState("");
-    const [status, setStatus] = useState("all");
+    const [status, setStatus] = useState<EmployeeStatus>("all");
     const [department, setDepartment] = useState("all");
 
     const [sort, setSort] = useState<EmployeeSortEnum>(

@@ -4,11 +4,12 @@ import { Row, Col, Empty } from "antd";
 import EmployeeCard from "./employeeCard";
 import ViewEmployee from "./viewEmployee";
 
-import type { EmployeeType } from "../employeeTypes";
+import type { EmployeeStatus, EmployeeType } from "../employeeTypes";
 import { EmployeeSortEnum } from "../employeeTypes";
 import { sortMapFilter } from "../utils/sortMap";
 import { FilterBySearch } from "../utils/filterBySearch";
 import { FilterByDept } from "../utils/deptExtract";
+import FilterByStatus from "../utils/filterByStatus";
 
 type EmployeeListType = {
     employees: EmployeeType[];
@@ -17,7 +18,7 @@ type EmployeeListType = {
     department: string;
     search: string;
     sort: EmployeeSortEnum;
-    status: string;
+    status: EmployeeStatus;
 };
 
 const EmployeeList = ({
@@ -33,15 +34,9 @@ const EmployeeList = ({
 
     const filteredEmployees = useMemo(() => {
         // 1️ Status filter
-        let data =
-            status === "all"
-                ? employees
-                : status === "active"
-                    ? activeEmployees
-                    : inactiveEmployees;
+        let data = FilterByStatus(employees, activeEmployees, inactiveEmployees, status);
 
         // 2️ Department 
-        console.log("dept", department, "serch", search, "sort", sort, data)
         data = FilterByDept(data, department);
 
         // 3️ Search 
@@ -51,7 +46,7 @@ const EmployeeList = ({
         data = sortMapFilter(data, sort);
 
         return data;
-        
+
     }, [
         employees,
         activeEmployees,
