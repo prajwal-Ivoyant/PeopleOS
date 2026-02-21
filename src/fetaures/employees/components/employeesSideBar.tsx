@@ -5,6 +5,7 @@ import {
     StopOutlined,
 } from "@ant-design/icons";
 import "./employeesSideBar.css";
+import type { EmployeeStatus } from "../employeeTypes";
 
 
 const { Text } = Typography;
@@ -17,7 +18,7 @@ type EmployeeSidebarFiltersProps = {
     departmentCounts: Record<string, number>;
 
     selectedStatus: string;
-    setSelectedStatus: React.Dispatch<React.SetStateAction<string>>;
+    setSelectedStatus: React.Dispatch<React.SetStateAction<EmployeeStatus>>;
 
     selectedDepartment: string;
     setSelectedDepartment: React.Dispatch<React.SetStateAction<string>>;
