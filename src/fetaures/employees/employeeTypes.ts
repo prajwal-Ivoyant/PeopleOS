@@ -1,5 +1,5 @@
 
-export type EmployeeStatus = 'active' | 'inactive';
+export type EmployeeStatus = 'active' | 'inactive' | "all";
 
 export interface EmployeeType {
     id: string;
