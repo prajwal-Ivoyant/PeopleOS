@@ -1,19 +1,17 @@
 .employee-card {
-    border: 1px solid #1e293b !important;
+    background: #F8FAFF;
+    border: 1px solid #1e293b2b !important;
     border-radius: 20px !important;
     transition: all 0.3s ease;
     color: #000000;
 }
 
 .employee-card:hover {
-    border: 1.5px solid #1677ff !important;
-
-
+    border: 1.5px solid #1677ff46 !important;
     transform: translateY(-4px);
 }
 
 .card-divider {
-    border-color: #1e293b !important;
     margin: 12px 0 !important;
 }
 
