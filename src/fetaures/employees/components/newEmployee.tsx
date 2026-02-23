@@ -11,11 +11,14 @@ import {
     Form, message,
 } from "antd";
 
-import { SaveOutlined } from "@ant-design/icons";
+import { SaveOutlined, SyncOutlined } from "@ant-design/icons";
 import { addEmployee } from "../../employeeSlice";
 import { useAppDispatch } from "../../../app/hooks";
 
+import dayjs from "dayjs";
+
 import { nanoid } from "@reduxjs/toolkit";
+import { useState } from "react";
 
 type Props = {
     open: boolean;
@@ -24,10 +27,32 @@ type Props = {
 
 const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
     const dispatch = useAppDispatch();
+
+    const [loading, setLoading] = useState(false);
+
     const [form] = Form.useForm();
 
-    const handleSave = () => {
-        form.validateFields().then((values) => {
+    const values = Form.useWatch([], form);
+
+    const isFormComplete =
+        values?.name &&
+        values?.email &&
+        values?.role &&
+        values?.department &&
+        values?.status &&
+        values?.salary &&
+        values?.joinedDate;
+
+    const handleSave = async () => {
+        try {
+            setLoading(true);
+
+            const values = await form.validateFields();
+
+            await new Promise((resolve) =>
+                setTimeout(resolve, 3000)
+            );
+
             const newEmployee = {
                 id: nanoid(),
                 name: values.name,
@@ -41,10 +66,18 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
             };
 
             dispatch(addEmployee(newEmployee));
-            message.success(`successfully added new Employee ${newEmployee.name}`)
+
+            message.success(
+                `Successfully added new Employee ${newEmployee.name}`
+            );
+
             form.resetFields();
             onClose();
-        });
+        } catch (err) {
+            message.error("Validation Error");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -63,7 +96,8 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                     type="primary"
                     icon={<SaveOutlined />}
                     onClick={handleSave}
-                // loading={loadings[3] && { icon: <SyncOutlined spin /> }}
+                    loading={loading && { icon: <SyncOutlined spin /> }}
+                    disabled={!isFormComplete}
                 >
                     Save
                 </Button>,
@@ -75,7 +109,10 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                         <Form.Item
                             label="Full Name"
                             name="name"
-                            rules={[{ required: true }]}
+                            rules={[{
+                                required: true,
+                                message: "Name is required"
+                            }]}
                         >
                             <Input />
                         </Form.Item>
@@ -92,7 +129,12 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                     </Col>
 
                     <Col span={12}>
-                        <Form.Item label="Phone" name="phone">
+                        <Form.Item label="Phone" name="phone" rules={[
+                            {
+                                pattern: /^[0-9]{10}$/,
+                                message: "Phone must be 10 digits"
+                            }
+                        ]}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -143,7 +185,15 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                         <Form.Item
                             label="Salary"
                             name="salary"
-                            rules={[{ required: true }]}
+                            rules={[
+                                { required: true, type: "number", message: "Salary must be a Number" },
+                                {
+                                    type: "number",
+                                    min: 10000,
+                                    message: "Salary must be greater than 10000"
+
+                                }
+                            ]}
                         >
                             <InputNumber
                                 style={{ width: "100%" }}
@@ -155,10 +205,15 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                         <Form.Item
                             label="Date Joined"
                             name="joinedDate"
-                            rules={[{ required: true }]}
+                            rules={[
+                                { required: true, message: "Joined date is required" },
+                            ]}
                         >
                             <DatePicker
                                 style={{ width: "100%" }}
+                                disabledDate={(current) =>
+                                    current && current > dayjs().endOf("day")
+                                }
                             />
                         </Form.Item>
                     </Col>
