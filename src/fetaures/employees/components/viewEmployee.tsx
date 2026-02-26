@@ -51,11 +51,13 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
 
+    const [isFormChanged, setIsFormChanged] = useState(false);
+
     const employee = useAppSelector((state) =>
         selectEmployees(state).find((e) => e.id === employeeId)
     );
 
-    // 🔥 FIX: Convert string → dayjs
+
     useEffect(() => {
         if (isEditing && employee) {
             form.setFieldsValue({
@@ -63,6 +65,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                 email: employee.email,
                 department: employee.department,
                 role: employee.role,
+                phone: employee.phone,
                 salary: employee.salary,
                 joinedDate: employee.joinedDate
                     ? dayjs(employee.joinedDate)
@@ -80,7 +83,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
             const updatedEmployee = {
                 ...employee,
                 ...values,
-                joinedDate: values.joinedDate.format("YYYY-MM-DD"), // 🔥 convert back to string
+                joinedDate: values.joinedDate.format("YYYY-MM-DD"),
             };
 
             dispatch(updateEmployee(updatedEmployee));
@@ -120,6 +123,10 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             key="save"
                             type="primary"
                             onClick={handleSave}
+                            disabled={
+                                !isFormChanged ||
+                                form.getFieldsError().some(({ errors }) => errors.length)
+                            }
                         >
                             Save
                         </Button>,
@@ -153,7 +160,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                     ]
             }
         >
-            {/* Header */}
+
             <Flex align="center" gap={20} style={{ padding: 20 }}>
                 <Avatar size={100}>
                     {employee.name.charAt(0)}
@@ -186,7 +193,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
             <Divider />
 
-            {/* Section Header */}
+
             <Row
                 justify="space-between"
                 align="middle"
@@ -205,15 +212,30 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                 )}
             </Row>
 
-            {/* Form */}
-            <Form form={form} layout="vertical">
+
+            <Form
+                form={form}
+                layout="vertical"
+
+                onValuesChange={() => {
+                    setIsFormChanged(true);
+                }}
+            >
                 <Row gutter={[16, 16]}>
                     <Col span={12}>
                         {isEditing ? (
                             <Form.Item
                                 label="Full Name"
                                 name="name"
-                                rules={[{ required: true }]}
+                                rules={[{
+                                    required: true,
+                                    message: "Name is required"
+                                },
+                                {
+                                    pattern: /^[A-Za-z\s]+$/,
+                                    message: "Only letters and spaces are allowed"
+                                }
+                                ]}
                             >
                                 <Input />
                             </Form.Item>
@@ -243,6 +265,26 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 <Text strong>Email</Text>
                                 <br />
                                 <Text>{employee.email}</Text>
+                            </>
+                        )}
+                    </Col>
+
+                    <Col span={12}>
+                        {isEditing ? (
+                            <Form.Item label="Phone" name="phone" rules={[
+                                { required: true, message: "Phone number required" },
+                                {
+                                    pattern: /^[0-9]{10}$/,
+                                    message: "Phone must be 10 digits"
+                                }
+                            ]}>
+                                <Input />
+                            </Form.Item>
+                        ) : (
+                            <>
+                                <Text strong>Phone Number</Text>
+                                <br />
+                                <Text>{employee.phone}</Text>
                             </>
                         )}
                     </Col>
@@ -295,7 +337,15 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             <Form.Item
                                 label="Salary"
                                 name="salary"
-                                rules={[{ required: true }]}
+                                rules={[
+                                    { required: true, type: "number", message: "Salary must be a Number" },
+                                    {
+                                        type: "number",
+                                        min: 10000,
+                                        message: "Salary must be greater than 10000"
+
+                                    }
+                                ]}
                             >
                                 <Input type="number" />
                             </Form.Item>
@@ -317,7 +367,11 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 name="joinedDate"
                                 rules={[{ required: true }]}
                             >
-                                <DatePicker style={{ width: "100%" }} />
+                                <DatePicker style={{ width: "100%" }}
+                                    disabledDate={(current) =>
+                                        current && current > dayjs().endOf("day")
+                                    }
+                                />
                             </Form.Item>
                         ) : (
                             <>
