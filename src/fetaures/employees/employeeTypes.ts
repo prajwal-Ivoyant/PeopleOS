@@ -5,7 +5,7 @@ export interface EmployeeType {
     id: string;
     name: string;
     email: string;
-    phone?: string;
+    phone: string;
     role: string;
     department: string;
     salary: number;

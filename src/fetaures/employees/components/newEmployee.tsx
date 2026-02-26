@@ -112,7 +112,12 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                             rules={[{
                                 required: true,
                                 message: "Name is required"
-                            }]}
+                            },
+                            {
+                                pattern: /^[A-Za-z\s]+$/,
+                                message: "Only letters and spaces are allowed"
+                            }
+                            ]}
                         >
                             <Input />
                         </Form.Item>
@@ -175,7 +180,6 @@ const NewEmployee: React.FC<Props> = ({ open, onClose }) => {
                                 options={[
                                     { label: "active", value: "active" },
                                     { label: "inactive", value: "inactive" },
-
                                 ]}
                             />
                         </Form.Item>
