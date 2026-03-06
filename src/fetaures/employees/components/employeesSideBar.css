@@ -5,13 +5,11 @@
 }
 
 .sidebar-title {
-
     font-size: 13px;
     letter-spacing: 2px;
     display: block;
     margin-bottom: 16px;
 }
-
 
 .sidebar-item {
     cursor: pointer;
@@ -21,7 +19,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #000000;
+    color: var(--text-main);
     transition: all 0.2s ease;
 }
 
@@ -29,12 +27,12 @@
     background: linear-gradient(90deg,
             rgba(22, 119, 255, 0.15),
             rgba(22, 119, 255, 0.05));
-    color: #1677ff !important;
+    color: var(--primary) !important;
 }
 
 .badge-pill .ant-badge-count {
     background: rgba(163, 230, 53, 0.2);
-    color: #1677ff;
+    color: #a3e635;
     border-radius: 20px;
     box-shadow: none;
 }
@@ -49,7 +47,7 @@
 }
 
 .sidebar-divider {
-    border-color: #1e293b !important;
+    border-color: var(--border-soft) !important;
     margin: 24px 0;
 }
 
@@ -58,7 +56,7 @@
 }
 
 .department-select .ant-select-selector {
-    background-color: #1e293b !important;
-    border: 1px solid #334155 !important;
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
     border-radius: 12px !important;
 }

@@ -1,13 +1,13 @@
 .employee-card {
-    background: #F8FAFF;
-    border: 1px solid #1e293b2b !important;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft) !important;
     border-radius: 20px !important;
     transition: all 0.3s ease;
-    color: #000000;
+    color: var(--text-main);
 }
 
 .employee-card:hover {
-    border: 1.5px solid #1677ff46 !important;
+    border: 1.5px solid var(--border-main) !important;
     transform: translateY(-4px);
 }
 
@@ -22,7 +22,7 @@
 }
 
 .salary-text {
-    color: #1677ff !important;
+    color: var(--primary) !important;
     font-weight: 600;
     display: flex;
     gap: 8px;
@@ -49,11 +49,11 @@
 
 .view-btn {
     background: transparent !important;
-    border: 1px solid #1e293b !important;
+    border: 1px solid var(--border-soft) !important;
     border-radius: 12px !important;
 }
 
 .view-btn:hover {
-    border-color: #1677ff !important;
-    color: #1677ff !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
 }

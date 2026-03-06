@@ -1,7 +1,7 @@
 import { Flex, Input, Select, Space, Typography, Button } from "antd";
 import type { EmployeeSortEnum } from "../employeeTypes";
 import { EmployeeSortEnum as SortValues } from "../employeeTypes";
-import { TeamOutlined, PlusOutlined } from "@ant-design/icons";
+import { TeamOutlined, PlusOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import NewEmployee from "./newEmployee";
 import "./employeesFilter.css";
@@ -15,11 +15,14 @@ type Props = {
 
     sort: EmployeeSortEnum;
     setSort: (v: EmployeeSortEnum) => void;
+
+    toggleTheme: () => void;
+    theme: 'light' | 'dark';
 };
 
-const EmployeesFilter = ({ search, setSearch, sort, setSort }: Props) => {
+const EmployeesFilter = ({ search, setSearch, sort, setSort, toggleTheme, theme }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
-
+   
     return (
         <>
             <div className="people-header">
@@ -62,6 +65,11 @@ const EmployeesFilter = ({ search, setSearch, sort, setSort }: Props) => {
 
                         >
                             Add Employee
+                        </Button>
+
+                        <Button shape="circle" onClick={toggleTheme}>
+                            {theme === "light" ? <MoonOutlined /> : <SunOutlined />}
+
                         </Button>
                     </Space>
                 </Flex>
