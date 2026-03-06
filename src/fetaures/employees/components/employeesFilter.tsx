@@ -1,10 +1,11 @@
 import { Flex, Input, Select, Space, Typography, Button } from "antd";
 import type { EmployeeSortEnum } from "../employeeTypes";
 import { EmployeeSortEnum as SortValues } from "../employeeTypes";
-import { TeamOutlined, PlusOutlined } from "@ant-design/icons";
+import { TeamOutlined, PlusOutlined, LoginOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import NewEmployee from "./newEmployee";
 import "./employeesFilter.css";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 const { Search } = Input;
@@ -18,7 +19,13 @@ type Props = {
 };
 
 const EmployeesFilter = ({ search, setSearch, sort, setSort }: Props) => {
+    const navigate = useNavigate();
+
     const [isOpen, setIsOpen] = useState(false);
+
+    const goToSignUpPage = () => {
+        navigate("/sign-up")
+    }
 
     return (
         <>
@@ -63,6 +70,16 @@ const EmployeesFilter = ({ search, setSearch, sort, setSort }: Props) => {
                         >
                             Add Employee
                         </Button>
+
+                        <Button
+                            type="primary"
+                            icon={<LoginOutlined />}
+                            className="add-btn"
+                            onClick={goToSignUpPage}
+                        >
+                            Login / Sign-Up
+                        </Button>
+
                     </Space>
                 </Flex>
             </div>
