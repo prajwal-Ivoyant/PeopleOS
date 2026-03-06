@@ -1,38 +1,35 @@
 body {
-    background: #ffffff;
+    background: var(--bg-main);
 }
 
 .ant-layout {
     background: inherit !important;
 }
 
-
-
 .app-header {
-    background: #F8FAFF;
-    border-bottom: 1px solid #1677ff46;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-main);
 }
 
 .app-layout {
     min-height: 100vh;
 }
 
-
 .app-content {
-    background: #e2eafccb;
+    background: var(--content-bacground);
     /* edf2fb */
 }
 
 .app-sider {
-    background: #F8FAFF;
-    border-right: 1px solid #1677ff46;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-main);
     padding-top: 20px;
 }
 
 .app-footer {
-    background: #F8FAFF;
+    background: var(--bg-card);
     text-align: center;
-    border-top: 1px solid #1677ff46;
+    border-top: 1px solid var(--border-main);
 }
 
 .content-header {
