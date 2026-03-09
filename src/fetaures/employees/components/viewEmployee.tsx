@@ -15,6 +15,7 @@ import {
     Select,
     DatePicker,
     message,
+    InputNumber,
 } from "antd";
 
 import {
@@ -99,6 +100,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
     const handleCancelEdit = () => {
         form.resetFields();
+        setIsFormChanged(false);
         setIsEditing(false);
     };
 
@@ -123,8 +125,10 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             key="save"
                             type="primary"
                             onClick={handleSave}
+
                             disabled={
                                 !isFormChanged ||
+                                Object.values(form.getFieldsValue()).some(v => !v) || //check if any form field is empty <= imp
                                 form.getFieldsError().some(({ errors }) => errors.length)
                             }
                         >
@@ -254,8 +258,8 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 label="Email"
                                 name="email"
                                 rules={[
-                                    { required: true },
-                                    { type: "email" },
+                                    { required: true, message: "Please enter Email" },
+                                    { type: "email", message: "Enter valid Email" }
                                 ]}
                             >
                                 <Input />
@@ -272,7 +276,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                     <Col span={12}>
                         {isEditing ? (
                             <Form.Item label="Phone" name="phone" rules={[
-                                { required: true, message: "Phone number required" },
+                                // { required: true, message: "Phone number required" },
                                 {
                                     pattern: /^[0-9]{10}$/,
                                     message: "Phone must be 10 digits"
@@ -338,16 +342,11 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 label="Salary"
                                 name="salary"
                                 rules={[
-                                    { required: true, type: "number", message: "Salary must be a Number" },
-                                    {
-                                        type: "number",
-                                        min: 10000,
-                                        message: "Salary must be greater than 10000"
-
-                                    }
+                                    { required: true, message: "Salary required" },
+                                    { type: "number", min: 10000, message: "Salary must be > 10000" }
                                 ]}
                             >
-                                <Input type="number" />
+                                <InputNumber style={{ width: "100%" }} />
                             </Form.Item>
                         ) : (
                             <>
