@@ -7,6 +7,8 @@ export const store = configureStore({
     reducer: {
         employees: employeesReducer,
     }
+
+    
 })
 
 // reducer{
