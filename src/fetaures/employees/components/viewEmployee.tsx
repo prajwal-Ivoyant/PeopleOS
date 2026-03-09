@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
     Modal,
     Row,
@@ -15,7 +15,7 @@ import {
     Select,
     DatePicker,
     message,
-    InputNumber,
+    InputNumber
 } from "antd";
 
 import {
@@ -52,12 +52,29 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
 
-    const [isFormChanged, setIsFormChanged] = useState(false);
-
     const employee = useAppSelector((state) =>
         selectEmployees(state).find((e) => e.id === employeeId)
     );
 
+    const formValues = Form.useWatch([], form);
+
+    const isFormChanged = useMemo(() => {
+        if (!employee || !formValues) return false;
+        return (
+            formValues.name !== employee.name ||
+            formValues.email !== employee.email ||
+            formValues.phone !== employee.phone ||
+            formValues.department !== employee.department ||
+            formValues.role !== employee.role ||
+            formValues.salary !== employee.salary ||
+            (formValues.joinedDate
+                ? formValues.joinedDate.format("YYYY-MM-DD") !== employee.joinedDate
+                : false)
+        );
+    }, [formValues, employee]);
+
+    const hasErrors = formValues !== undefined &&
+        form.getFieldsError().some(({ errors }) => errors.length > 0);
 
     useEffect(() => {
         if (isEditing && employee) {
@@ -88,10 +105,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
             };
 
             dispatch(updateEmployee(updatedEmployee));
-            message.success(
-                `Updated ${updatedEmployee.name} successfully`
-            );
-
+            message.success(`Updated ${updatedEmployee.name} successfully`);
             setIsEditing(false);
         } catch (err) {
             console.log("Validation failed");
@@ -100,7 +114,6 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
     const handleCancelEdit = () => {
         form.resetFields();
-        setIsFormChanged(false);
         setIsEditing(false);
     };
 
@@ -125,12 +138,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             key="save"
                             type="primary"
                             onClick={handleSave}
-
-                            disabled={
-                                !isFormChanged ||
-                                Object.values(form.getFieldsValue()).some(v => !v) || //check if any form field is empty <= imp
-                                form.getFieldsError().some(({ errors }) => errors.length)
-                            }
+                            disabled={!isFormChanged || hasErrors}
                         >
                             Save
                         </Button>,
@@ -164,7 +172,6 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                     ]
             }
         >
-
             <Flex align="center" gap={20} style={{ padding: 20 }}>
                 <Avatar size={100}>
                     {employee.name.charAt(0)}
@@ -197,7 +204,6 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
             <Divider />
 
-
             <Row
                 justify="space-between"
                 align="middle"
@@ -216,29 +222,19 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                 )}
             </Row>
 
-
-            <Form
-                form={form}
-                layout="vertical"
-
-                onValuesChange={() => {
-                    setIsFormChanged(true);
-                }}
-            >
+            <Form form={form} layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col span={12}>
                         {isEditing ? (
                             <Form.Item
                                 label="Full Name"
                                 name="name"
-                                rules={[{
-                                    required: true,
-                                    message: "Name is required"
-                                },
-                                {
-                                    pattern: /^[A-Za-z\s]+$/,
-                                    message: "Only letters and spaces are allowed"
-                                }
+                                rules={[
+                                    { required: true, message: "Name is required" },
+                                    {
+                                        pattern: /^[A-Za-z\s]+$/,
+                                        message: "Only letters and spaces are allowed"
+                                    }
                                 ]}
                             >
                                 <Input />
@@ -275,13 +271,16 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
                     <Col span={12}>
                         {isEditing ? (
-                            <Form.Item label="Phone" name="phone" rules={[
-                                // { required: true, message: "Phone number required" },
-                                {
-                                    pattern: /^[0-9]{10}$/,
-                                    message: "Phone must be 10 digits"
-                                }
-                            ]}>
+                            <Form.Item
+                                label="Phone"
+                                name="phone"
+                                rules={[
+                                    {
+                                        pattern: /^[0-9]{10}$/,
+                                        message: "Phone must be 10 digits"
+                                    }
+                                ]}
+                            >
                                 <Input />
                             </Form.Item>
                         ) : (
@@ -352,9 +351,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             <>
                                 <Text strong>Salary</Text>
                                 <br />
-                                <Text>
-                                    ₹{employee.salary.toLocaleString()}
-                                </Text>
+                                <Text>₹{employee.salary.toLocaleString()}</Text>
                             </>
                         )}
                     </Col>
@@ -366,7 +363,8 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                                 name="joinedDate"
                                 rules={[{ required: true }]}
                             >
-                                <DatePicker style={{ width: "100%" }}
+                                <DatePicker
+                                    style={{ width: "100%" }}
                                     disabledDate={(current) =>
                                         current && current > dayjs().endOf("day")
                                     }
