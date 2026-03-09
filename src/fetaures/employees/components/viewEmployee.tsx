@@ -125,13 +125,10 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
                             key="save"
                             type="primary"
                             onClick={handleSave}
-                            // disabled={
-                            //     !isFormChanged ||
-                            //     form.getFieldsError().some(({ errors }) => errors.length)
-                            // }
+
                             disabled={
                                 !isFormChanged ||
-                                Object.values(form.getFieldsValue()).some(v => !v) ||
+                                Object.values(form.getFieldsValue()).some(v => !v) || //check if any form field is empty <= imp
                                 form.getFieldsError().some(({ errors }) => errors.length)
                             }
                         >
