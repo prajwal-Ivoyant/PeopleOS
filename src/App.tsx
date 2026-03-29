@@ -1,18 +1,14 @@
-
-import './App.css'
-
-//import EmployeeList from './fetaures/employees/components/employeesList'
-import EmployeeLayout from './fetaures/employees/pages/employeeLayout'
-
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./Pages/LandingPage";
+import Dashboard from "./Pages/Dashboard"; 
 
 function App() {
-
   return (
-    <>
-      <EmployeeLayout></EmployeeLayout>
-
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
