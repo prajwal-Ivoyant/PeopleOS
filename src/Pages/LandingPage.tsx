@@ -101,7 +101,12 @@ const FOOTER_LINKS = ["Features", "Contact"];
 
 // ─── ATOMS ────────────────────────────────────────────────────────────────────
 
-const ScreenMock = ({ title, children }) => (
+type ScreenMockProps = {
+  title: string;
+  children: React.ReactNode;
+};
+
+const ScreenMock: React.FC<ScreenMockProps> = ({ title, children }) => (
   <div className="screen-mock">
     <div className="screen-bar">
       
@@ -111,7 +116,19 @@ const ScreenMock = ({ title, children }) => (
   </div>
 );
 
-const SectionHeader = ({ tag, title, subtitle, center }) => (
+type SectionHeaderProps = {
+  tag: string;
+  title: React.ReactNode;
+  subtitle?: string;
+  center?: boolean;
+};
+
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  tag,
+  title,
+  subtitle,
+  center = false,
+}) => (
   <div className={center ? "section-hd section-hd--center" : "section-hd"}>
     <Text className="section-tag">{tag}</Text>
     <Title className="section-title">{title}</Title>
@@ -119,7 +136,11 @@ const SectionHeader = ({ tag, title, subtitle, center }) => (
   </div>
 );
 
-const CheckItem = ({ children }) => (
+type CheckItemProps = {
+  children: React.ReactNode;
+};
+
+const CheckItem: React.FC<CheckItemProps> = ({ children }) => (
   <div className="check-item">
     <span className="check-badge"><CheckCircleOutlined /></span>
     <Text className="check-label">{children}</Text>
