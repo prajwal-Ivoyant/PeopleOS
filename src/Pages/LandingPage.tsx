@@ -86,7 +86,7 @@ const SHOWCASE_TABS = [
 ];
 
 const STEPS = [
-  { title: "Open the App",    description: "Launch PeopleOS and land on your full employee directory instantly",     icon: <HomeOutlined /> },
+  { title: "Open the App",    description: "Launch PeopleOS and land on your full employee directory instantly one by one",     icon: <HomeOutlined /> },
   { title: "Filter & Search", description: "Use the sidebar and search bar to find exactly who you're looking for", icon: <SearchOutlined /> },
   { title: "Manage & Edit",   description: "View profiles, edit records, toggle status, or remove employees",       icon: <EditOutlined /> },
 ];
@@ -289,7 +289,7 @@ const HowItWorks = () => (
   <section className="section steps-section">
     <div className="container container--narrow">
       <SectionHeader tag="✦ How It Works" title="Up and running in minutes"
-        subtitle="Four simple steps. No training. No manual. Just open and go." center />
+        subtitle="Three simple steps. No training. No manual. Just open and go." center />
       <Steps className="steps" current={1} labelPlacement="vertical"
         items={STEPS} style={{ marginTop: 52 }} />
     </div>
