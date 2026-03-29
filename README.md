@@ -1,7 +1,7 @@
 # 🚀 PeopleOS
 
-> Employment Management System to Manage Employees, Tasks, and
-> Organizational Workflows
+> A Modern Employment Management System for Managing Employees, Tasks,
+> and Organizational Workflows
 
 🌐 Live Demo: https://people-os-kappa.vercel.app/\
 📦 GitHub Repo: https://github.com/prajwal-Ivoyant/PeopleOS
@@ -11,46 +11,114 @@
 ## 📌 Overview
 
 **PeopleOS** is a modern **Employment Management System (EMS)** designed
-to help organizations manage:
+to help organizations efficiently manage employees, track their details,
+and streamline workflows.
 
--   👥 Employees
--   📋 Tasks & assignments
--   🧭 Workflows and productivity
-
-It provides a centralized platform to organize workforce data, track
-performance, and streamline operations.
+It provides a clean, dashboard-based interface for HR teams and
+administrators to manage workforce data in one place.
 
 ------------------------------------------------------------------------
 
-## ✨ Features
+## 🧠 Core Features
 
 ### 👥 Employee Management
 
--   Add, update, and manage employee records\
--   Store role, department, and contact details
+-   Add, update, and delete employees\
+-   Store detailed employee information\
+-   View employee profiles in a structured format
 
-### 📋 Task & Work Assignment
+### 📋 Employee Details
 
--   Assign tasks to employees\
--   Track task progress and completion
+Each employee record includes: - Full Name\
+- Email\
+- Phone Number\
+- Role\
+- Department\
+- Salary\
+- Date Joined\
+- Status (Active / Inactive)
 
-### 📊 Workflow Management
+------------------------------------------------------------------------
 
--   Organize team operations\
--   Improve productivity and accountability
+## 🖥️ UI Features
 
-### ⚡ Modern UI
+### 📂 Sidebar Navigation
 
--   Clean and responsive interface\
--   Fast and user-friendly experience
+-   All Employees (Total count)
+-   Active Employees (Filtered view)
+-   Inactive Employees (Filtered view)
+-   Department-based filtering
+
+------------------------------------------------------------------------
+
+### 🔍 Header Controls
+
+-   Search employees by name or role\
+-   Sort employees (e.g., Name A--Z)\
+-   Add Employee button\
+-   Theme toggle (Dark/Light mode)
+
+------------------------------------------------------------------------
+
+### 🧾 Employee Cards
+
+-   Displays employee summary\
+-   Includes:
+    -   Name & Role\
+    -   Status badge (Active / Inactive)\
+    -   Email\
+    -   Department\
+    -   Date Joined\
+    -   Salary\
+-   "View Details" action for full profile
+
+------------------------------------------------------------------------
+
+### ➕ Add Employee Modal
+
+-   Form with validation\
+-   Fields:
+    -   Full Name \*
+    -   Email \*
+    -   Phone
+    -   Role \*
+    -   Department \*
+    -   Status \*
+    -   Salary \*
+    -   Date Joined \*
+-   Actions: Save / Cancel
+
+------------------------------------------------------------------------
+
+### 📄 Employee Details Modal
+
+-   Avatar (initial-based)
+-   Name, Role, Department, Status\
+-   Detailed personal information\
+-   Actions:
+    -   Edit employee\
+    -   Toggle status\
+    -   Delete employee
+
+------------------------------------------------------------------------
+
+## ⚙️ Functional Capabilities
+
+-   ✅ Create Employee\
+-   ✅ Read Employee (List & Details)\
+-   ✅ Update Employee\
+-   ✅ Delete Employee\
+-   ✅ Search\
+-   ✅ Filter (Status & Department)\
+-   ✅ Sort
 
 ------------------------------------------------------------------------
 
 ## 🛠️ Tech Stack
 
 -   ⚛️ React + TypeScript\
--   🎨 Ant Design / Tailwind CSS\
 -   ⚡ Vite\
+-   🎨 Ant Design / Modern UI\
 -   ☁️ Vercel (Deployment)
 
 ------------------------------------------------------------------------
@@ -82,37 +150,20 @@ Open: http://localhost:5173
 
 ## 🎯 Use Cases
 
--   🏢 Companies managing employees\
--   👨‍💼 HR teams tracking workforce\
--   🚀 Startups organizing team workflows
+-   🏢 HR Management Systems\
+-   🚀 Startup employee tracking\
+-   👨‍💼 Admin dashboards\
+-   📊 Workforce management tools
 
 ------------------------------------------------------------------------
 
 ## 🔮 Future Improvements
 
--   🤖 AI-based employee insights\
--   📊 Performance analytics dashboard\
--   🔔 Notifications & alerts\
--   🌐 Role-based access control\
--   📱 Mobile support
-
-------------------------------------------------------------------------
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1.  Fork the repo\
-2.  Create a new branch (`feature/your-feature`)\
-3.  Commit your changes\
-4.  Push to your branch\
-5.  Open a Pull Request
-
-------------------------------------------------------------------------
-
-## 📄 License
-
-MIT License --- free to use, modify, and distribute.
+-   🔐 Authentication & Role-based access\
+-   🗄️ Backend integration (Node.js + DB)\
+-   📊 Analytics dashboard\
+-   🔔 Notifications\
+-   📱 Mobile responsiveness
 
 ------------------------------------------------------------------------
 
