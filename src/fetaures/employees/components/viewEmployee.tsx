@@ -114,7 +114,7 @@ const ViewEmployee: React.FC<ViewEmployeeProps> = ({
 
     const handleCancelEdit = () => {
         form.resetFields();
-        setIsFormChanged(false);
+
         setIsEditing(false);
     };
 
